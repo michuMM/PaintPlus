@@ -8,8 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     qDebug()<<"Debug button";
-
-    QSize screenSize = QSize(833, 552);
+    QSize screenSize = QSize(size().rwidth(), size().rheight());
 
     image=QImage(screenSize,QImage::Format_RGB32);
     image.fill(Qt::white);
@@ -26,7 +25,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->label->setText("Współrzędne kursora: ");
 
     QWidget::setCursor(Qt::CrossCursor);
-
+    ui->menubar->setCursor(Qt::ArrowCursor);
+    ui->statusBar->setCursor(Qt::ArrowCursor);
     ui->statusBar->setStyleSheet("background-color: rgb(240,240,240);");
 }
 
@@ -45,8 +45,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
-    ui->label->setText("wspolrzednne: " + QString::number(event->pos().x()) + ", " + QString::number(event->pos().y()) + ")");
-
+    ui->label->setText("wspolrzedne: " + QString::number(event->pos().x()) + ", " + QString::number(event->pos().y()) + ")");
     if((event->buttons()  & Qt::LeftButton) && drawing){
         QPainter painter(&image);
         painter.setPen(QPen(brushColor,brushsize,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
