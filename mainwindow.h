@@ -20,15 +20,17 @@ public:
     virtual void mouseMoveEvent(QMouseEvent *event);
     virtual void mouseReleaseEvent(QMouseEvent *event);
     virtual void paintEvent(QPaintEvent *event);
-
+    virtual void resizeEvent(QResizeEvent* event);
+    virtual void resizeImage(QImage *image, const QSize &newSize);
 private slots:
 
 private:
     Ui::MainWindow *ui;
     QImage image;
-    bool drawing;
     QPoint lastPoint;
-    int brushsize;
     QColor brushColor;
+    int brushsize;
+    bool drawing;
 };
+
 #endif // MAINWINDOW_H

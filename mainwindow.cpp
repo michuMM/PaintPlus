@@ -70,5 +70,24 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 
 }
 
+void MainWindow::resizeEvent(QResizeEvent* event) {
+    int width = event->size().width();
+    int height = event->size().height();
+    QSize newSize(width, height);
+
+    resizeImage(&image, newSize);
+
+    QMainWindow::resizeEvent(event);
+}
+
+void MainWindow::resizeImage(QImage *image, const QSize &newSize)
+{
+    QImage newImage(newSize, QImage::Format_RGB32);
+    newImage.fill(Qt::white);
+
+    QPainter painter(&newImage);
+    painter.drawImage(QPoint(0, 0), *image);
+    *image = newImage;
+}
 
 
