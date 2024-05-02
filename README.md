@@ -1,29 +1,25 @@
 # PaintPlus
 
-PaintPlus to rozbudowana aplikacja do rysowania i edycji obrazów, oparta na technologii Qt. Pozwala użytkownikom na tworzenie, modyfikację i eksplorację obrazów w różnych formatach.
+PaintPlus is an advanced application for drawing and editing images, based on the Qt technology. It allows users to create, modify, and explore images in various formats.
 
 ![PaintPlus Screenshot](screenshot.png)
 
-## Funkcje
+## Features
 
 
 
-## Jak uruchomić
+## How to run
 
-1. Upewnij się, że masz zainstalowany zestaw deweloperski Qt na swoim systemie.
-2. Sklonuj ten projekt na swój lokalny komputer.
-3. Uruchom Qt Creator i otwórz plik projektu PaintPlus.pro.
-4. Zbuduj projekt w Qt Creator i uruchom aplikację.
+1. Make sure you have the Qt development framework installed on your system.
+2. Clone this project to your local computer.
+3. Open the PaintPlus.pro project file using Qt Creator.
+4. Build the project in Qt Creator and run the application.
 
-## Technologie
+## Technologies used
 
-- C++ z frameworkiem Qt
+- C++ Qt
 
-## Współautorzy
+## Contributors
 
 - Michał Mroczka - https://github.com/michuMM
-- Katarzyna Kowalska - https://github.com/kutabix
-
-## Licencja
-
-Ten projekt jest udostępniany na licencji MIT. Więcej informacji znajdziesz w pliku LICENSE.
+- Bartłomiej Mroczek - https://github.com/kutabix
