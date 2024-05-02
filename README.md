@@ -2,7 +2,7 @@
 
 PaintPlus is an advanced application for drawing and editing images, based on the Qt technology. It allows users to create, modify, and explore images in various formats.
 
-![PaintPlus Screenshot](screenshot.png)
+![readme](https://github.com/michuMM/PaintPlus/assets/63909687/a1256b88-3f42-48ce-95ce-39d3f9265654)
 
 ## Features
 
