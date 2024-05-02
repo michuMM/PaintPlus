@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include<QDebug>
+#include "colors.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -13,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     image=QImage(screenSize,QImage::Format_RGB32);
     image.fill(Qt::white);
     drawing=false;
-    brushColor=Qt::blue;
+    brushColor=Qt::black;
     brushsize=5;
 
     setMouseTracking(true);
@@ -24,15 +25,29 @@ MainWindow::MainWindow(QWidget *parent)
     ui->statusBar->addPermanentWidget(ui->label);
     ui->label->setText("Współrzędne kursora: ");
 
-    QWidget::setCursor(Qt::CrossCursor);
-    ui->menubar->setCursor(Qt::ArrowCursor);
-    ui->statusBar->setCursor(Qt::ArrowCursor);
     ui->statusBar->setStyleSheet("background-color: rgb(240,240,240);");
+
+    QList<QPushButton*> buttons = MainWindow::findChildren<QPushButton *>();
+    for (int i = 0; i < 30; ++i) {
+        buttons.at(i)->setStyleSheet(QString("QPushButton { background-color: %1; }").arg(mainColors.at(i)));
+        buttons.at(i)->setObjectName(mainColors.at(i));
+        connect(buttons.at(i),SIGNAL(clicked()),this,SLOT(pushButtonClicked()));
+    }
+    buttons.at(30)->setStyleSheet(QString("QPushButton { background-color: black; }"));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::pushButtonClicked() {
+
+    QPushButton* buttonSender = qobject_cast<QPushButton*>(sender());
+    ui->currentColorButton->setStyleSheet(QString("QPushButton { background-color: %1; }").arg(buttonSender->objectName()));
+    QColor col = QColor(buttonSender->objectName());
+    brushColor = col;
+
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
@@ -46,7 +61,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
     ui->label->setText("wspolrzedne: " + QString::number(event->pos().x()) + ", " + QString::number(event->pos().y()) + ")");
-    if((event->buttons()  & Qt::LeftButton) && drawing){
+    if((event->buttons()  & Qt::LeftButton) && drawing && event->pos().x()>200){
         QPainter painter(&image);
         painter.setPen(QPen(brushColor,brushsize,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
         painter.drawLine(lastPoint,event->pos());
@@ -89,5 +104,6 @@ void MainWindow::resizeImage(QImage *image, const QSize &newSize)
     painter.drawImage(QPoint(0, 0), *image);
     *image = newImage;
 }
+
 
 

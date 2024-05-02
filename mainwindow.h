@@ -23,6 +23,8 @@ public:
     virtual void resizeEvent(QResizeEvent* event);
     virtual void resizeImage(QImage *image, const QSize &newSize);
 private slots:
+    void pushButtonClicked();
+
 
 private:
     Ui::MainWindow *ui;
