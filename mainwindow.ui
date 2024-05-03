@@ -406,8 +406,8 @@ border-right: 1px solid black;
      <rect>
       <x>170</x>
       <y>250</y>
-      <width>101</width>
-      <height>51</height>
+      <width>97</width>
+      <height>42</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -422,97 +422,87 @@ border-right: 1px solid black;
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QPushButton" name="resetButton">
-     <property name="geometry">
-      <rect>
-       <x>54</x>
-       <y>13</y>
-       <width>36</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_5">
-     <property name="geometry">
-      <rect>
-       <x>9</x>
-       <y>13</y>
-       <width>37</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Yu Gothic UI Semibold</family>
-       <pointsize>12</pointsize>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Clear</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>12</x>
-      <y>320</y>
-      <width>261</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="label_4">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_5">
        <property name="font">
         <font>
          <family>Yu Gothic UI Semibold</family>
-         <pointsize>10</pointsize>
+         <pointsize>12</pointsize>
          <bold>true</bold>
         </font>
        </property>
        <property name="text">
-        <string>Brush width:</string>
+        <string>Clear</string>
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QFrame" name="brushWidth">
-       <property name="styleSheet">
-        <string notr="true">#brushWidth {
-	background-color: white;
-	border-radius: 10px;
-}</string>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="resetButton">
+       <property name="text">
+        <string/>
        </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-       <widget class="QFrame" name="lineWidth">
-        <property name="geometry">
-         <rect>
-          <x>9</x>
-          <y>9</y>
-          <width>113</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QFrame" name="brushWidth">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>320</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#brushWidth {
+	background-color: white;
+	border-radius: 10px;
+}</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QFrame" name="lineWidth">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>9</y>
+       <width>113</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>321</y>
+      <width>76</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Yu Gothic UI Semibold</family>
+      <pointsize>10</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Brush width:</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
