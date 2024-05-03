@@ -24,7 +24,10 @@ public:
     virtual void resizeImage(QImage *image, const QSize &newSize);
 private slots:
     void pushButtonClicked();
+    void on_resetButton_clicked();
 
+
+    void on_brushWidthSlider_valueChanged(int value);
 
 private:
     Ui::MainWindow *ui;

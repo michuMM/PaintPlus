@@ -34,6 +34,15 @@ MainWindow::MainWindow(QWidget *parent)
         connect(buttons.at(i),SIGNAL(clicked()),this,SLOT(pushButtonClicked()));
     }
     buttons.at(30)->setStyleSheet(QString("QPushButton { background-color: black; }"));
+
+    QPixmap icon(":/new/prefix1/resources/icons8-clear-96.png");
+    ui->resetButton->setIcon(icon);
+    ui->resetButton->setIconSize(QSize(25, 25));
+
+    ui->brushWidthSlider->setValue(50);
+
+    ui->lineWidth->setFrameShape(QFrame::HLine);
+    ui->lineWidth->setFrameShadow(QFrame::Plain);
 }
 
 MainWindow::~MainWindow()
@@ -105,5 +114,17 @@ void MainWindow::resizeImage(QImage *image, const QSize &newSize)
     *image = newImage;
 }
 
+void MainWindow::on_resetButton_clicked()
+{
+    image.fill(Qt::white);
+    update();
 
+}
+
+void MainWindow::on_brushWidthSlider_valueChanged(int value)
+{
+    ui->lineWidth->setLineWidth(value/7.5);
+    qDebug() << value;
+    brushsize = value/8;
+}
 

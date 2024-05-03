@@ -10,5 +10,8 @@
         <file>resources/icons8-print-48.png</file>
         <file>resources/icons8-save-48.png</file>
         <file>resources/icons8-save-as-48.png</file>
+        <file>resources/icons8-fill-color-48.png</file>
+        <file>resources/icons8-clear-48.png</file>
+        <file>resources/icons8-clear-96.png</file>
     </qresource>
 </RCC>
