@@ -62,10 +62,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+//colors buttons
 void MainWindow::pushButtonClicked() {
 
     QPushButton* buttonSender = qobject_cast<QPushButton*>(sender());
     ui->currentColorButton->setStyleSheet(QString("QPushButton { background-color: %1; }").arg(buttonSender->objectName()));
+    ui->lineWidth->setStyleSheet(QString("QFrame { color: %1 } ").arg(buttonSender->objectName()));
     QColor col = QColor(buttonSender->objectName());
     brushColor = col;
 
