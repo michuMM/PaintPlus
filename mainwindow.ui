@@ -72,7 +72,7 @@ border-right: 1px solid black;
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>-10</x>
+      <x>-20</x>
       <y>-50</y>
       <width>311</width>
       <height>1071</height>
@@ -103,10 +103,10 @@ border-right: 1px solid black;
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>20</y>
-       <width>131</width>
-       <height>141</height>
+       <x>10</x>
+       <y>10</y>
+       <width>151</width>
+       <height>161</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout">
@@ -326,8 +326,8 @@ border-right: 1px solid black;
    <widget class="QFrame" name="frame_3">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>250</y>
+      <x>20</x>
+      <y>280</y>
       <width>151</width>
       <height>51</height>
      </rect>
@@ -388,30 +388,17 @@ border-right: 1px solid black;
      <string>Set of colors:</string>
     </property>
    </widget>
-   <widget class="QSlider" name="brushWidthSlider">
+   <widget class="QFrame" name="frame_4">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>360</y>
+      <x>20</x>
+      <y>220</y>
       <width>131</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QFrame" name="frame_2">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>250</y>
-      <width>97</width>
-      <height>42</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">#frame_2 {
+     <string notr="true">#frame_4 {
 	background-color: white;
 	border-radius: 10px;
 }</string>
@@ -422,25 +409,62 @@ border-right: 1px solid black;
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <layout class="QGridLayout" name="gridLayout_2">
+    <layout class="QGridLayout" name="gridLayout_4">
      <item row="0" column="0">
-      <widget class="QLabel" name="label_5">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="1">
+        <widget class="QPushButton" name="pencilButton">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QPushButton" name="rubberButton">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="resetButton">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>340</y>
+      <width>151</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_4">
        <property name="font">
         <font>
          <family>Yu Gothic UI Semibold</family>
-         <pointsize>12</pointsize>
+         <pointsize>10</pointsize>
          <bold>true</bold>
         </font>
        </property>
        <property name="text">
-        <string>Clear</string>
+        <string>Tool width:</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="resetButton">
-       <property name="text">
-        <string/>
+     <item>
+      <widget class="QSlider" name="brushWidthSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
@@ -449,8 +473,8 @@ border-right: 1px solid black;
    <widget class="QFrame" name="brushWidth">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>320</y>
+      <x>20</x>
+      <y>420</y>
       <width>131</width>
       <height>31</height>
      </rect>
@@ -483,26 +507,6 @@ border-right: 1px solid black;
       <enum>QFrame::Raised</enum>
      </property>
     </widget>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>12</x>
-      <y>321</y>
-      <width>76</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Yu Gothic UI Semibold</family>
-      <pointsize>10</pointsize>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Brush width:</string>
-    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

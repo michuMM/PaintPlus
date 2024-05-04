@@ -22,12 +22,14 @@ public:
     virtual void paintEvent(QPaintEvent *event);
     virtual void resizeEvent(QResizeEvent* event);
     virtual void resizeImage(QImage *image, const QSize &newSize);
+    virtual void activateCurrentTool();
+
 private slots:
     void pushButtonClicked();
     void on_resetButton_clicked();
-
-
     void on_brushWidthSlider_valueChanged(int value);
+    void on_pencilButton_clicked();
+    void on_rubberButton_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -36,6 +38,7 @@ private:
     QColor brushColor;
     int brushsize;
     bool drawing;
+    QString selectedTool;
 };
 
 #endif // MAINWINDOW_H

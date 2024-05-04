@@ -2,18 +2,23 @@
 #include "./ui_mainwindow.h"
 #include<QDebug>
 #include "colors.h"
+#include "icons.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    qDebug()<<"Debug button";
+    selectedTool = "pencilButton";
+    activateCurrentTool();
+
     QSize screenSize = QSize(size().rwidth(), size().rheight());
 
     image=QImage(screenSize,QImage::Format_RGB32);
     image.fill(Qt::white);
+
     drawing=false;
+
     brushColor=Qt::black;
     brushsize=5;
 
@@ -26,23 +31,30 @@ MainWindow::MainWindow(QWidget *parent)
     ui->label->setText("Współrzędne kursora: ");
 
     ui->statusBar->setStyleSheet("background-color: rgb(240,240,240);");
+    ui->graphicsView->setCursor(Qt::ArrowCursor);
 
     QList<QPushButton*> buttons = MainWindow::findChildren<QPushButton *>();
     for (int i = 0; i < 30; ++i) {
         buttons.at(i)->setStyleSheet(QString("QPushButton { background-color: %1; }").arg(mainColors.at(i)));
         buttons.at(i)->setObjectName(mainColors.at(i));
+        buttons.at(i)->setCursor(Qt::ArrowCursor);
         connect(buttons.at(i),SIGNAL(clicked()),this,SLOT(pushButtonClicked()));
     }
     buttons.at(30)->setStyleSheet(QString("QPushButton { background-color: black; }"));
 
-    QPixmap icon(":/new/prefix1/resources/icons8-clear-96.png");
-    ui->resetButton->setIcon(icon);
-    ui->resetButton->setIconSize(QSize(25, 25));
+    QPixmap clearIcon(Icons::clearIcon96);
+    QPixmap pencilIcon(Icons::pencilIcon);
+    QPixmap rubberIcon(Icons::rubberIcon);
+
+    ui->resetButton->setIcon(clearIcon);
 
     ui->brushWidthSlider->setValue(50);
 
     ui->lineWidth->setFrameShape(QFrame::HLine);
     ui->lineWidth->setFrameShadow(QFrame::Plain);
+    ui->pencilButton->setIcon(pencilIcon);
+    ui->rubberButton->setIcon(rubberIcon);
+
 }
 
 MainWindow::~MainWindow()
@@ -65,6 +77,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
         drawing=true;
         lastPoint=event->pos();
     }
+
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
@@ -72,8 +85,13 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
     ui->label->setText("wspolrzedne: " + QString::number(event->pos().x()) + ", " + QString::number(event->pos().y()) + ")");
     if((event->buttons()  & Qt::LeftButton) && drawing && event->pos().x()>200){
         QPainter painter(&image);
-        painter.setPen(QPen(brushColor,brushsize,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
-        painter.drawLine(lastPoint,event->pos());
+        if(selectedTool == "rubberButton") {
+            painter.setPen(QPen(Qt::white,brushsize,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
+        }
+        else {
+            painter.setPen(QPen(brushColor,brushsize,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
+        }
+        painter.drawLine(lastPoint, event->pos());
         lastPoint=event->pos();
         this->update();
     }
@@ -114,6 +132,8 @@ void MainWindow::resizeImage(QImage *image, const QSize &newSize)
     *image = newImage;
 }
 
+// tools defined below
+
 void MainWindow::on_resetButton_clicked()
 {
     image.fill(Qt::white);
@@ -126,5 +146,30 @@ void MainWindow::on_brushWidthSlider_valueChanged(int value)
     ui->lineWidth->setLineWidth(value/7.5);
     qDebug() << value;
     brushsize = value/8;
+}
+
+void MainWindow::activateCurrentTool() {
+    QList<QPushButton*> foundButtons = ui->frame_4->findChildren<QPushButton*>();
+    for (QPushButton* button : foundButtons) {
+        button->setStyleSheet("");
+    }
+    QPushButton *foundButton = QWidget::findChild<QPushButton*>(selectedTool);
+    foundButton->setStyleSheet("QPushButton { background-color: #2ecc71; border: 2px solid #27ae60; }"
+                               "QPushButton:hover { background-color: #27ae60; }"
+                               "QPushButton:pressed { background-color: #1f8b4c; }");
+}
+
+void MainWindow::on_pencilButton_clicked()
+{
+    selectedTool = "pencilButton";
+    activateCurrentTool();
+
+}
+
+
+void MainWindow::on_rubberButton_clicked()
+{
+    selectedTool = "rubberButton";
+    activateCurrentTool();
 }
 

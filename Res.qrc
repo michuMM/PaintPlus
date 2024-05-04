@@ -13,5 +13,8 @@
         <file>resources/icons8-fill-color-48.png</file>
         <file>resources/icons8-clear-48.png</file>
         <file>resources/icons8-clear-96.png</file>
+        <file>resources/icons8-rubber-48.png</file>
+        <file>resources/icons8-pencil-24.png</file>
+        <file>resources/icons8-clean-24.png</file>
     </qresource>
 </RCC>

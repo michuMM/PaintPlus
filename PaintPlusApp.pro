@@ -10,11 +10,13 @@ CONFIG += c++17
 
 SOURCES += \
     colors.cpp \
+    icons.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     colors.h \
+    icons.h \
     mainwindow.h
 
 FORMS += \
@@ -26,4 +28,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    Res.qrc
+    Res.qrc \
+    icons.qrc
