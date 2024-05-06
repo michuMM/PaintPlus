@@ -23,6 +23,7 @@ public:
     virtual void resizeEvent(QResizeEvent* event);
     virtual void resizeImage(QImage *image, const QSize &newSize);
     virtual void activateCurrentTool();
+    virtual void closeEvent(QCloseEvent *event) override;
 
 private slots:
     void pushButtonClicked();
@@ -36,9 +37,11 @@ private:
     QImage image;
     QPoint lastPoint;
     QColor brushColor;
+    QString selectedTool;
     int brushsize;
     bool drawing;
-    QString selectedTool;
+    bool modified;
+
 };
 
 #endif // MAINWINDOW_H

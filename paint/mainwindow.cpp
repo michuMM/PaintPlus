@@ -3,6 +3,8 @@
 #include<QDebug>
 #include "colors.h"
 #include "icons.h"
+#include <QMainWindow>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -18,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     image.fill(Qt::white);
 
     drawing=false;
+    modified = false;
 
     brushColor=Qt::black;
     brushsize=5;
@@ -95,6 +98,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
             painter.setPen(QPen(brushColor,brushsize,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
         }
         painter.drawLine(lastPoint, event->pos());
+        modified = true;
         lastPoint=event->pos();
         this->update();
     }
@@ -135,11 +139,29 @@ void MainWindow::resizeImage(QImage *image, const QSize &newSize)
     *image = newImage;
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (modified) {
+        QMessageBox::StandardButton resBtn = QMessageBox::question(this, "PaintPlus",
+                                                                   tr("Do you want to save changes? \n"),
+                                                                   QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,
+                                                                   QMessageBox::Yes);
+        if (resBtn != QMessageBox::Yes) {
+            event->ignore();
+        } else {
+            event->accept();
+        }
+    }
+
+
+}
+
 // tools defined below
 
 void MainWindow::on_resetButton_clicked()
 {
     image.fill(Qt::white);
+    modified = true;
     update();
 
 }
