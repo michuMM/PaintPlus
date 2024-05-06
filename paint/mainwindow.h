@@ -24,6 +24,7 @@ public:
     virtual void resizeImage(QImage *image, const QSize &newSize);
     virtual void activateCurrentTool();
     virtual void closeEvent(QCloseEvent *event) override;
+    virtual void drawGrid();
 
 private slots:
     void pushButtonClicked();
@@ -31,6 +32,7 @@ private slots:
     void on_brushWidthSlider_valueChanged(int value);
     void on_pencilButton_clicked();
     void on_rubberButton_clicked();
+    void on_actionGridLines_changed();
 
 private:
     Ui::MainWindow *ui;
@@ -38,9 +40,11 @@ private:
     QPoint lastPoint;
     QColor brushColor;
     QString selectedTool;
+    double gridSize;
     int brushsize;
     bool drawing;
     bool modified;
+    bool showGrid;
 
 };
 

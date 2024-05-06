@@ -4,6 +4,7 @@
 #include <QString>
 
 namespace Icons {
+    extern QString appIcon;
     extern QString clearIcon;
     extern QString clearIcon96;
     extern QString copyIcon;

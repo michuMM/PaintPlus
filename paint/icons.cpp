@@ -1,6 +1,7 @@
 #include "icons.h"
 
 namespace Icons {
+    QString appIcon = ":/new/prefix1/resources/icons8-paint-48.png";
     QString clearIcon = ":/new/prefix1/resources/icons8-clear-48.png";
     QString clearIcon96 = ":/new/prefix1/resources/icons8-clear-96.png";
     QString copyIcon = ":/new/prefix1/resources/icons8-copy-48.png";

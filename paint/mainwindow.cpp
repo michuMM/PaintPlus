@@ -5,6 +5,7 @@
 #include "icons.h"
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QWheelEvent>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,9 +22,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     drawing=false;
     modified = false;
+    showGrid = false;
 
     brushColor=Qt::black;
     brushsize=5;
+    gridSize = 20;
 
     setMouseTracking(true);
     ui->centralwidget->setMouseTracking(true);
@@ -31,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle(tr("PaintPlus"));
 
     ui->statusBar->addPermanentWidget(ui->label);
-    ui->label->setText("Współrzędne kursora: ");
+    ui->label->setText("x: y:");
 
     ui->statusBar->setStyleSheet("background-color: rgb(240,240,240);");
     ui->graphicsView->setCursor(Qt::ArrowCursor);
@@ -57,12 +60,29 @@ MainWindow::MainWindow(QWidget *parent)
     ui->lineWidth->setFrameShadow(QFrame::Plain);
     ui->pencilButton->setIcon(pencilIcon);
     ui->rubberButton->setIcon(rubberIcon);
-
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::drawGrid() {
+    if(!showGrid) return;
+    QPainter painter(&image);
+    QPen pen(Qt::lightGray);
+    painter.setPen(pen);
+
+    for (double x = 200; x <= width(); x += gridSize)
+    {
+        painter.drawLine(x, 0, x, height());
+    }
+
+    for (double y = 0; y <= height(); y += gridSize)
+    {
+        painter.drawLine(200, y, width(), y);
+    }
+    update();
 }
 
 
@@ -88,19 +108,16 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
-    ui->label->setText("wspolrzedne: " + QString::number(event->pos().x()) + ", " + QString::number(event->pos().y()) + ")");
+    ui->label->setText("x: " + QString::number(event->pos().x()) + " y: " + QString::number(event->pos().y()) + "   ");
     if((event->buttons()  & Qt::LeftButton) && drawing && event->pos().x()>200){
         QPainter painter(&image);
-        if(selectedTool == "rubberButton") {
-            painter.setPen(QPen(Qt::white,brushsize,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
-        }
-        else {
-            painter.setPen(QPen(brushColor,brushsize,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
-        }
+        painter.setPen(selectedTool == "rubberButton" ?
+                           QPen(Qt::white, brushsize, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin) :
+                           QPen(brushColor, brushsize, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         painter.drawLine(lastPoint, event->pos());
         modified = true;
         lastPoint=event->pos();
-        this->update();
+        update();
     }
 
 }
@@ -109,6 +126,20 @@ void MainWindow::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     painter.drawImage(this->rect(),image,image.rect());
+    QPen pen(Qt::lightGray);
+    painter.setPen(pen);
+
+    if(showGrid) {
+        for (double x = 200; x <= width(); x += gridSize)
+        {
+            painter.drawLine(x, 0, x, height());
+        }
+
+        for (double y = 0; y <= height(); y += gridSize)
+        {
+            painter.drawLine(200, y, width(), y);
+        }
+    }
 }
 
 void MainWindow::mouseReleaseEvent(QMouseEvent *event)
@@ -137,6 +168,8 @@ void MainWindow::resizeImage(QImage *image, const QSize &newSize)
     QPainter painter(&newImage);
     painter.drawImage(QPoint(0, 0), *image);
     *image = newImage;
+    drawGrid();
+    update();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -162,6 +195,7 @@ void MainWindow::on_resetButton_clicked()
 {
     image.fill(Qt::white);
     modified = true;
+    drawGrid();
     update();
 
 }
@@ -196,5 +230,19 @@ void MainWindow::on_rubberButton_clicked()
 {
     selectedTool = "rubberButton";
     activateCurrentTool();
+}
+
+
+
+void MainWindow::on_actionGridLines_changed()
+{
+    if(!showGrid) {
+        showGrid = true;
+        drawGrid();
+    }
+    else {
+        showGrid = false;
+    }
+    qDebug() << showGrid;
 }
 
