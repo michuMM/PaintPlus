@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QWheelEvent>
+#include <QString>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -179,14 +180,66 @@ void MainWindow::closeEvent(QCloseEvent *event)
                                                                    tr("Do you want to save changes? \n"),
                                                                    QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,
                                                                    QMessageBox::Yes);
-        if (resBtn != QMessageBox::Yes) {
+        if (resBtn == QMessageBox::Yes) {
+            on_actionSave_as_triggered();
+        } else if (resBtn == QMessageBox::Cancel){
             event->ignore();
-        } else {
-            event->accept();
-        }
+        } else return;
     }
 
 
+}
+
+void MainWindow::on_actionSave_as_triggered()
+{
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Zapisz obraz"), "", tr("Obrazy (*.png *.jpg *.bmp)"));
+    if (!filePath.isEmpty()) {
+        QRect rect(326, 33, 1267 - 326, 698 - 33);
+        QImage croppedImage = image.copy(rect);
+        if (croppedImage.save(filePath)) {
+            qDebug() << "Obraz został pomyślnie zapisany jako" << filePath;
+            modified = false;
+        } else {
+            qDebug() << "Wystąpił błąd podczas zapisywania obrazu";
+        }
+    }
+}
+
+
+void MainWindow::on_actionAbout_Paint_Plus_triggered()
+{
+    QMessageBox::about(this, "About PaintPlus",
+                       "PaintPlus is an advanced application for drawing and editing images, based on the Qt technology.\n"
+                       "Authors: Bartłomiej Mroczek, Michał Mroczka\n"
+                       "Version: 1.0\n"
+                       "Year: 2024\n"
+                       "Licence: Open Source\n"
+                       "More information: https://github.com/michuMM/PaintPlus.git");
+}
+
+
+void MainWindow::on_actionNew_triggered()
+{
+    if(modified) {
+        QMessageBox::StandardButton resBtn = QMessageBox::question(this, "Do you want to save changes before creating a new image?",
+                                                                   tr("You have unsaved changes \n"),
+                                                                   QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel,
+                                                                   QMessageBox::Yes);
+        if (resBtn == QMessageBox::Yes) {
+
+            on_actionSave_as_triggered();
+        }
+        else if (resBtn == QMessageBox::No) {
+            on_resetButton_clicked();
+            modified = false;
+        }
+        else {
+            return;
+        }
+    }
+    else {
+        modified = false;
+    }
 }
 
 // tools defined below

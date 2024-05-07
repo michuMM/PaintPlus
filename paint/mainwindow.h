@@ -33,6 +33,9 @@ private slots:
     void on_pencilButton_clicked();
     void on_rubberButton_clicked();
     void on_actionGridLines_changed();
+    void on_actionSave_as_triggered();
+    void on_actionAbout_Paint_Plus_triggered();
+    void on_actionNew_triggered();
 
 private:
     Ui::MainWindow *ui;
