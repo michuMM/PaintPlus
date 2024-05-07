@@ -105,8 +105,8 @@ border-right: 1px solid black;
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>151</width>
-       <height>161</height>
+       <width>255</width>
+       <height>211</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout">
@@ -437,7 +437,7 @@ border-right: 1px solid black;
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -515,7 +515,7 @@ border-right: 1px solid black;
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -653,7 +653,7 @@ border-right: 1px solid black;
      <normaloff>:/new/prefix1/resources/icons8-cut-48.png</normaloff>:/new/prefix1/resources/icons8-cut-48.png</iconset>
    </property>
    <property name="text">
-    <string>Wytnij</string>
+    <string>Cut</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+X</string>
@@ -665,7 +665,7 @@ border-right: 1px solid black;
      <normaloff>:/new/prefix1/resources/icons8-copy-48.png</normaloff>:/new/prefix1/resources/icons8-copy-48.png</iconset>
    </property>
    <property name="text">
-    <string>Kopiuj</string>
+    <string>Copy</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+C</string>
@@ -677,7 +677,7 @@ border-right: 1px solid black;
      <normaloff>:/new/prefix1/resources/icons8-paste-48.png</normaloff>:/new/prefix1/resources/icons8-paste-48.png</iconset>
    </property>
    <property name="text">
-    <string>Wklej</string>
+    <string>Paste</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+V</string>
